@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
+import { useState } from 'react';
+import Modal from "react-modal";
+import DaumPostcode from 'react-daum-postcode';
 
 const Container = styled.div`
     width: 100%;
@@ -15,7 +18,7 @@ const TitleBox = styled.div`
 `;
 
 const Title = styled.div`
-    width: 300px;
+    width: 280px;
     height: 100px;
 
     font-weight: bold;
@@ -23,26 +26,37 @@ const Title = styled.div`
     line-height: 120%;
 `;
 
-const AddressBtn = styled.button`
-    width: 90%;
+const Form = styled.form`
+`;
+
+const Address = styled.input`
+    width: 92%;
     height: 60px;
     border: 1px solid black;
     border-radius: 20px;
     background-color: white;
+    padding-left: 23px;
+
+    font-size: 20px;
 `;
 
-const SearchBtn = styled.div`
-    width: 30px;
-    height: 30px;
-    margin-left: 296px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const Box = styled.form`
+    width: 90%;
+    height: 80px;
+    margin-bottom: 20px;
 
-    span{
-        font-size: 30px;
-    }
+`;
+
+const Next = styled.button`
+    width: 90%;
+    height: 60px;
+    background-color: #3C7EFF;
+    border: none;
+    border-radius: 20px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
 `;
 
 
@@ -50,8 +64,35 @@ const SearchBtn = styled.div`
 
 function Destination() {
 
-    const onClick = () => {
-        window.location.href="https://www.naver.com/"
+    const MoveOn = () => {
+        window.location.href="/starting"
+    }
+
+    const [roadAddress, setRoadAddress] = useState("");
+    const [isOpen, setIsOpen] = useState(false); //추가
+    console.log(roadAddress)
+
+    const completeHandler1 = (data) =>{
+        setRoadAddress(data.roadAddress);
+        setIsOpen(false); //추가
+    }
+    // Modal 스타일
+    const customStyles = {
+        overlay: {
+            backgroundColor: "rgba(0,0,0,0.5)",
+        },
+        content: {
+            left: "0",
+            margin: "auto",
+            width: "500px",
+            height: "400px",
+            padding: "0",
+            overflow: "hidden",
+        },
+    };
+
+    const toggle = () =>{
+        setIsOpen(!isOpen);
     }
 
     return (
@@ -62,11 +103,16 @@ function Destination() {
             <TitleBox>
                 <Title>약속 장소를 입력하세요</Title>
             </TitleBox>
-            <AddressBtn onClick={onClick}>
-                <SearchBtn><span class="material-symbols-outlined">search</span></SearchBtn>
-            </AddressBtn>
-
-        
+            <Form>
+            <Box>
+                <Address value={roadAddress} readOnly placeholder='주소 입력' onClick={toggle} />
+                <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
+                    <button onClick={toggle}>x</button>
+                <DaumPostcode onComplete={completeHandler1} height="100%" />
+            </Modal>    
+            </Box>
+            </Form>
+            <Next onClick={MoveOn}>완료</Next>
         </Container>
         </>
     )

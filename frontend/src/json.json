@@ -1,0 +1,16 @@
+{
+    "data": 
+    [{
+        "name": "고경환",
+        "startAddress": "경기도 고양시 일산동구 호수로 595",
+        "finalTime": "52분"
+    }, {
+        "name": "심재성",
+        "startAddress": "경기도 의정부시 평화로 525",
+        "finalTime": "1시 7분"
+    }, {
+        "name": "김재우",
+        "startAddress": "서울특별시 용산구 대사관로 49",
+        "finalTime": "36분"
+    }]  
+}

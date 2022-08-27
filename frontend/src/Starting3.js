@@ -91,7 +91,7 @@ const Form = styled.form`
 `;
 
 
-function Starting() {
+function Starting3() {
     const [roadAddress, setRoadAddress] = useState("");
     const [isOpen, setIsOpen] = useState(false); //추가
 
@@ -143,7 +143,7 @@ function Starting() {
     };
 
     const MoveOn = () => {
-        window.location.href="/starting2"
+        window.location.href="/result"
     }
 
 
@@ -155,7 +155,7 @@ function Starting() {
             <TitleBox>
                 <Title>출발지를 <br></br>입력해주세요</Title>
             </TitleBox>
-            <Subheading>첫 번째 친구의 주소를 입력해주세요</Subheading>
+            <Subheading>세 번째 친구의 주소를 입력해주세요</Subheading>
             <Form onSubmit={onSubmit}>
             <Box>
                 <Name onChange={onChangeName} placeholder='이름 입력'></Name>
@@ -175,4 +175,4 @@ function Starting() {
     )
 }
 
-export default Starting;
+export default Starting3;

@@ -2,18 +2,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Destination from './Destination';
 import Starting from './Starting';
-import Friend1 from './Friend1';
-import Friend2 from './Friend2';
+import Result from './Result';
+import Starting2 from './Starting2';
+import Starting3 from './Starting3';
 
 function Router() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path='/starting' element={<Starting />} />
+                <Route path='/starting2' element={<Starting2 />} />
+                <Route path='/starting3' element={<Starting3 />} />
                 <Route path='/home' element={<Home />} />
-                <Route path='/' element={<Starting />} />
-                <Route path='/friend1' element={<Friend1 />} />
-                <Route path='/friend2' element={<Friend2 />} />
                 <Route path='/destination' element={<Destination />} />
+                <Route path='/result' element={<Result />} />
             </Routes>
         </BrowserRouter>
     );
