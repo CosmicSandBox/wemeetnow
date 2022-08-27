@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
 import { axios } from 'axios';
-import { useState, useNavigate } from 'react' 
-import { Link } from 'react-router-dom';
+import { useState } from 'react' 
 import DaumPostcode from 'react-daum-postcode';
 import Modal from "react-modal";
 
@@ -129,9 +128,9 @@ function Starting3() {
         e.preventDefault();
         const getData = async () => {
             await axios
-                .post('http://localhost:8000/wemeet/', {
+                .post('http://localhost:8000/wemeet/-3', {
                     name: name,
-                    startAddress: name,
+                    startAddress: roadAddress,
                     endAddress: name
                 })
                 .then((response) => {

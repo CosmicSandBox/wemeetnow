@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
-import json from './json'
+import { useState, useEffect} from 'react'
 
 const Container = styled.div`
     width: 100%;
@@ -91,23 +91,36 @@ const SuggestText = styled.div`
 
 
 function Result() {
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState([]);
 
-    const onClick = () => {
-        window.location.href="https://www.naver.com/"
-    }
+    const getTime = async() => {
+        const json = await (    
+            await fetch(
+                `http://localhost:8000/finalResult`
+            )
+        ).json();
+        setUser(json.data)
+        setLoading(false);
+    };
+    useEffect(()=>{
+        getTime()
+    })
 
-    const Data = json.data;
+
 
     return (
         <>
         <GlobalStyle />
+        {loading ? (<h1>Loading...</h1>
+            ) : (
         <Container>
             <BasicForm />
             <TitleBox>
                 <Title>약속 장소까지 걸리는 시간</Title>
             </TitleBox>
             <MidBox>
-                {Data.map((item, index)=>
+                {user.map((item, index)=>
                 <ResultBox key={index}>
                     <Name>{item.name}님,</Name>
                     <Time>{item.finalTime}</Time>
@@ -119,8 +132,8 @@ function Result() {
                 <SuggestText>얏호</SuggestText>
             </SuggestBox>
 
-        
         </Container>
+        )}
         </>
     )
 }
