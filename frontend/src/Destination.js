@@ -65,8 +65,6 @@ function Destination() {
             <AddressBtn onClick={onClick}>
                 <SearchBtn><span class="material-symbols-outlined">search</span></SearchBtn>
             </AddressBtn>
-
-        
         </Container>
         </>
     )

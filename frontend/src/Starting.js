@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
-import { useState } from 'react' 
+import { useState } from 'react'
+import { axios } from 'axios';
 
 const Container = styled.div`
     width: 100%;
@@ -92,6 +93,8 @@ const ConfirmBtn = styled.button`
     font-size: 20px;
 `;
 
+const Form = styled.form`
+`;
 
 
 function Starting() {
@@ -106,6 +109,24 @@ function Starting() {
         setName(value)
         console.log(name);
     }
+
+    const onSubmit = (e) =>  {   
+        e.preventDefault();
+        const getData = async () => {
+            await axios
+                .post('http://localhost:8000/wemeet/', {
+                    name: name,
+                    startAddress: name,
+                    endAddress: name
+                })
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((err) => console.log(err));
+        };
+        getData();
+    };
+
     
 
     return (
@@ -117,6 +138,7 @@ function Starting() {
                 <Title>출발지를 <br></br>추가해주세요</Title>
             </TitleBox>
             <Subheading>첫 번째 친구의 주소를 입력해주세요</Subheading>
+            <Form onSubmit={onSubmit}>
             <Box>
                 <Name onChange={onChangeName} placeholder='이름 입력'></Name>
                 <Address onClick={{onClick}}>
@@ -126,8 +148,9 @@ function Starting() {
             </Box>
 
             <ConfirmBox>
-                <ConfirmBtn onClick={onClick}>시간 계산하기!</ConfirmBtn>
+                <ConfirmBtn>시간 계산하기!</ConfirmBtn>
             </ConfirmBox>
+            </Form>
         </Container>
         </>
     )
