@@ -9,6 +9,7 @@ function Router() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path='/home' element={<Home />} />
                 <Route path='/' element={<Starting />} />
                 <Route path='/friend1' element={<Friend1 />} />
                 <Route path='/friend2' element={<Friend2 />} />
