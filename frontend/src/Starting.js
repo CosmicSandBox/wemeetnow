@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
-import { useState } from 'react' 
+import { useState, useNavigate } from 'react' 
+import DaumPostcode from "react-daum-postcode";
+
+import Modal from "react-modal"; // 추가
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
@@ -95,17 +99,35 @@ const ConfirmBtn = styled.button`
 
 
 function Starting() {
+    const [roadAddress, setRoadAddress] = useState("");
+    const [isOpen, setIsOpen] = useState(false); //추가
 
-    const onClick = () => {
-        window.location.href="https://www.naver.com/"
+    const completeHandler1 = (data) =>{
+        setRoadAddress(data.roadAddress);
+        setIsOpen(false); //추가
+    }
+    const navigate = useNavigate();
+
+
+    // Modal 스타일
+    const customStyles = {
+        overlay: {
+            backgroundColor: "rgba(0,0,0,0.5)",
+        },
+        content: {
+            left: "0",
+            margin: "auto",
+            width: "500px",
+            height: "400px",
+            padding: "0",
+            overflow: "hidden",
+        },
+    };
+
+    const toggle = () =>{
+        setIsOpen(!isOpen);
     }
 
-    //user name
-    const [name, setName] = useState("");
-    const onChangeName = ({target: {value}}) => {
-        setName(value)
-        console.log(name);
-    }
     
 
     return (
@@ -114,20 +136,20 @@ function Starting() {
         <Container>
             <BasicForm />
             <TitleBox>
-                <Title>출발지를 <br></br>추가해주세요</Title>
+                <Title>약속장소를 <br></br>입력해주세요</Title>
             </TitleBox>
-            <Subheading>첫 번째 친구의 주소를 입력해주세요</Subheading>
-            <Box>
-                <Name onChange={onChangeName} placeholder='이름 입력'></Name>
-                <Address onClick={{onClick}}>
-                        <div>주소 입력</div>
-                        <span class="material-symbols-outlined">search</span>
-                </Address>
-            </Box>
+            
+            <input value={roadAddress} readOnly placeholder="도로명 주소" onClick={toggle}/>
+            <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
+                <button onClick={toggle}>x</button>
+                <DaumPostcode onComplete={completeHandler1} height="100%" />
+            </Modal>    
 
-            <ConfirmBox>
-                <ConfirmBtn onClick={onClick}>시간 계산하기!</ConfirmBtn>
-            </ConfirmBox>
+            <br></br>
+
+            <Link to="/friend1" onClick={()=>{
+                
+            }}>다음</Link>
         </Container>
         </>
     )
