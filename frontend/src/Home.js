@@ -14,13 +14,14 @@ const Bigtitle = styled.div`
     vertical-align: middle;
 `;
 const Smalltitle = styled.div`
-    width: 100%
+    width: 100%;
     font-weight: bold;
     font-size: 16px;
     text-align: center;
     vertical-align: middle;
     padding-top: 10px;
 `;
+
 const StyledButton = styled.button`
   padding: 20px 100px;
   border-radius: 8px;
