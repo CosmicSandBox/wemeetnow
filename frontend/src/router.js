@@ -6,6 +6,7 @@ function Router() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path='/' element={<Home />} />
                 <Route path='/destination' element={<Destination />} />
 
                 </Routes>
