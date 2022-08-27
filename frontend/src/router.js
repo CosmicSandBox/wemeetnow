@@ -13,6 +13,7 @@ function Router() {
                 <Route path='/starting' element={<Starting />} />
                 <Route path='/starting2' element={<Starting2 />} />
                 <Route path='/starting3' element={<Starting3 />} />
+                <Route path='/home' element={<Home />} />
                 <Route path='/destination' element={<Destination />} />
                 <Route path='/result' element={<Result />} />
             </Routes>
