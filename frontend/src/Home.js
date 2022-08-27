@@ -1,28 +1,34 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
+
 const Container = styled.div`
     width: 100%;
-    padding-top: 350px;
-    margin-left: auto;
-    margin-right: auto;
+    height: 844px;
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
-const Bigtitle = styled.div`
+const Box = styled.div`
     width: 100%;
-    font-weight: bold;
-    font-size: 64px;
-    text-align: center;
-    vertical-align: middle;
+    height: 202px;
 `;
 
-const Smalltitle = styled.div`
-    width: 100%
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    vertical-align: middle;
-    padding-top: 10px;
-`;
+function Home() {
+    return (
+        <>
+        <GlobalStyle />
+        <Container>
+            <Box>
+            </Box>
+        </Container>
+
+
+
+        </>
+    )
+}
 
 const StyledButton = styled.button`
   padding: 20px 100px;
