@@ -1,34 +1,26 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
-
 const Container = styled.div`
     width: 100%;
-    height: 844px;
-    padding-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: 350px;
+    margin-left: auto;
+    margin-right: auto;
 `;
-
-const Box = styled.div`
+const Bigtitle = styled.div`
     width: 100%;
-    height: 202px;
+    font-weight: bold;
+    font-size: 64px;
+    text-align: center;
+    vertical-align: middle;
 `;
-
-function Home() {
-    return (
-        <>
-        <GlobalStyle />
-        <Container>
-            <Box>
-            </Box>
-        </Container>
-
-
-
-        </>
-    )
-}
+const Smalltitle = styled.div`
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+`;
 
 const StyledButton = styled.button`
   padding: 20px 100px;
@@ -42,9 +34,14 @@ const StyledButton = styled.button`
   font-weight: bold;
   background-color: #3C7EFF;
   color: white;
+  border: none;
 `;
 
 function Home() {
+
+    const onClick = () => {
+        window.location.href="/destination"
+    }
     return (
         <>
         <GlobalStyle />
@@ -54,11 +51,11 @@ function Home() {
                 </Bigtitle>
                 <Smalltitle>
                   우리 오늘 보는거 맞지
-                </Smalltitle>               
+                </Smalltitle>
         </Container>
-        <StyledButton>
+        <StyledButton onClick={onClick}>
           시작!
-        </StyledButton> 
+        </StyledButton>
         </>
     )
 }

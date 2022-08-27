@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './Home';
 import Destination from './Destination';
 import Starting from './Starting';
 import Result from './Result';
 import Starting2 from './Starting2';
 import Starting3 from './Starting3';
+import Home from './Home';
 
 function Router() {
     return (
@@ -16,6 +16,7 @@ function Router() {
                 <Route path='/home' element={<Home />} />
                 <Route path='/destination' element={<Destination />} />
                 <Route path='/result' element={<Result />} />
+                <Route path='/' element={<Home />} />
             </Routes>
         </BrowserRouter>
     );
