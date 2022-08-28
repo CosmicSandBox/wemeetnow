@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
-import { useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
+import axios from 'axios';
 
 const Container = styled.div`
     width: 100%;
@@ -88,25 +89,24 @@ const SuggestText = styled.div`
 `
 
 
-
-
 function Result() {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState([]);
 
-    const getTime = async() => {
-        const json = await (    
-            await fetch(
-                `http://localhost:8000/finalResult`
-            )
-        ).json();
-        setUser(json.data)
-        setLoading(false);
+    const getTime = () => {
+        axios.get('http://127.0.0.1:8000/finalResult/')
+        .then(res => {
+            console.log('res:', res)
+            console.log('res.data: ', res.data)
+            setUser(res.data.data)
+            setLoading(false)
+        })
+
     };
     useEffect(()=>{
-        getTime()
-    })
-
+        
+        setTimeout(() => {getTime()}, 5000)
+    }, [])
 
 
     return (

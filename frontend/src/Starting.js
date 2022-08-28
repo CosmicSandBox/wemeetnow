@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
-import { axios } from 'axios';
+import axios from 'axios';
 import { useState } from 'react' 
 import DaumPostcode from 'react-daum-postcode';
 import Modal from "react-modal";
+import { useLocation, useNavigate  } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
@@ -94,6 +95,11 @@ function Starting() {
     const [roadAddress, setRoadAddress] = useState("");
     const [isOpen, setIsOpen] = useState(false); //추가
 
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const start = location.state.start;
+
     const completeHandler1 = (data) =>{
         setRoadAddress(data.roadAddress);
         setIsOpen(false); //추가
@@ -126,19 +132,22 @@ function Starting() {
 
     const onSubmit = (e) =>  {   
         e.preventDefault();
-        const getData = async () => {
-            await axios
-                .post('http://localhost:8000/wemeet/-1', {
+        const getData = () => {
+            console.log('starting11.js/getData()')
+            axios.post('http://127.0.0.1:8000/wemeet-1/', {
                     name: name,
                     startAddress: roadAddress,
-                    endAddress: name
+                    endAddress: start
                 })
-                .then((response) => {
-                    console.log(response.data)
-                })
+                .then(navigate('/starting2',{
+                    state: {
+                      start: start
+                    }}))
                 .catch((err) => console.log(err));
         };
         getData();
+        
+        
     };
 
     const MoveOn = () => {
@@ -166,7 +175,8 @@ function Starting() {
             </Box>
 
             <ConfirmBox>
-                <ConfirmBtn onClick={MoveOn}>다음!</ConfirmBtn>
+                <ConfirmBtn onClick={onSubmit
+                }>완료</ConfirmBtn>
             </ConfirmBox>
             </Form> 
         </Container>

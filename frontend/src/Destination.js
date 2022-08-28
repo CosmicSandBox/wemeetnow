@@ -4,6 +4,7 @@ import BasicForm from './BasicForm';
 import { useState } from 'react';
 import Modal from "react-modal";
 import DaumPostcode from 'react-daum-postcode';
+import {useNavigate} from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
@@ -71,6 +72,7 @@ function Destination() {
     const [roadAddress, setRoadAddress] = useState("");
     const [isOpen, setIsOpen] = useState(false); //추가
     console.log(roadAddress)
+    const navigate = useNavigate();
 
     const completeHandler1 = (data) =>{
         setRoadAddress(data.roadAddress);
@@ -112,7 +114,13 @@ function Destination() {
             </Modal>    
             </Box>
             </Form>
-            <Next onClick={MoveOn}>완료</Next>
+            
+            <Next onClick={()=>{
+                    navigate('/starting',{
+                        state: {
+                          start: roadAddress
+                        }})
+                }}>완료</Next>
         </Container>
         </>
     )

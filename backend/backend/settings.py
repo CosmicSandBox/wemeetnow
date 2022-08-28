@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'meet',
-    'djangorestframework',
-    'django-cors-headers',
+    'rest_framework',
+    'corsheaders',
 ]
 
 #이하 추가하기

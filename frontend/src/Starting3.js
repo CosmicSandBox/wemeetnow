@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 import BasicForm from './BasicForm';
-import { axios } from 'axios';
+import  axios  from 'axios';
 import { useState } from 'react' 
 import DaumPostcode from 'react-daum-postcode';
 import Modal from "react-modal";
+import { useLocation, useNavigate  } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
@@ -94,6 +95,10 @@ function Starting3() {
     const [roadAddress, setRoadAddress] = useState("");
     const [isOpen, setIsOpen] = useState(false); //추가
 
+    const navigate = useNavigate();
+    const location = useLocation();
+    const start = location.state.start;
+
     const completeHandler1 = (data) =>{
         setRoadAddress(data.roadAddress);
         setIsOpen(false); //추가
@@ -126,16 +131,15 @@ function Starting3() {
 
     const onSubmit = (e) =>  {   
         e.preventDefault();
-        const getData = async () => {
-            await axios
-                .post('http://localhost:8000/wemeet/-3', {
+        const getData = () => {
+            console.log('starting1.js/getData()')
+            axios
+                .post('http://127.0.0.1:8000/wemeet-3/', {
                     name: name,
                     startAddress: roadAddress,
-                    endAddress: name
+                    endAddress: start
                 })
-                .then((response) => {
-                    console.log(response.data)
-                })
+                .then(window.location.href="/result")
                 .catch((err) => console.log(err));
         };
         getData();
@@ -166,7 +170,7 @@ function Starting3() {
             </Box>
 
             <ConfirmBox>
-                <ConfirmBtn onClick={MoveOn}>다음!</ConfirmBtn>
+                <ConfirmBtn onClick={onSubmit}>다음!</ConfirmBtn>
             </ConfirmBox>
             </Form> 
         </Container>
